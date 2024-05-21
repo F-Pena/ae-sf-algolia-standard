@@ -1,4 +1,4 @@
-// import { ALGOLIA_INDEX_NAME, RESULTS_RULE_CONTEXT } from "./utils/constants";
+import { useState, useEffect } from "react";
 import { 
     searchClient,
     searchSettings
@@ -13,10 +13,19 @@ import {
     SearchBox
 } from "react-instantsearch"; 
 import { Results } from "./components/ui/Results";
+import { Filters } from "./components/ui/Filters";
 
 
 const App = () => {
     const query = useQuery();
+    const [hitsPerPage, setHitsPerPage] = useState<number | undefined>(10);
+
+    useEffect(() => {
+        searchSettings.then((settings) => {
+            setHitsPerPage(settings.hitsPerPage);
+        });
+    }, []);
+    
     return (
         <InstantSearch
             indexName={ALGOLIA_INDEX_NAME} 
@@ -27,10 +36,11 @@ const App = () => {
         >
             <h1>Algolia</h1> 
             <Configure 
-                hitsPerPage={10}
+                hitsPerPage={hitsPerPage}
                 filters={ALGOLIA_FILTER}
             />
             <SearchBox/>
+            <Filters/>
             <Results/>
             <Pagination/>
         </InstantSearch>
