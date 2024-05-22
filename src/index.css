@@ -1,11 +1,7 @@
-:root {
+#root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,48 +17,85 @@ a {
 a:hover {
   color: #535bf2;
 }
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: calc(2.5rem + 2.5 * ((100vw - 1920px) / 1920));
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+h2 {
+  font-size: calc(2rem + 1.5 * ((100vw - 1920px) / 1920));
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.8rem;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+h3 {
+  font-size: calc(1.8rem + 1.3 * ((100vw - 1920px) / 1920));
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.6rem;
+}
+
+h4 {
+  font-size: calc(1.6rem + 1.1 * ((100vw - 1920px) / 1920));
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 0.4rem;
+}
+
+h5 {
+  font-size: calc(1.4rem + 0.9 * ((100vw - 1920px) / 1920));
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 0.2rem;
+}
+
+h6 {
+  font-size: calc(1.2rem + 0.7 * ((100vw - 1920px) / 1920));
+  font-weight: 600;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+p {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+}
+
+blockquote {
+  font-size: 1.8rem;
+  font-style: italic;
+  line-height: 1.4;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-left: 4px solid #646cff;
+  background-color: #f2f2f2;
+}
+
+code {
+  font-family: 'Courier New', monospace;
+  font-size: 1.4rem;
+  background-color: #f2f2f2;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+pre {
+  font-family: 'Courier New', monospace;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  background-color: #f2f2f2;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+@media(min-width:768px) {
+  .layout {
+    display:grid;
+    grid-template-columns:25% 1fr;
   }
 }

@@ -14,15 +14,18 @@ import {
 } from "react-instantsearch"; 
 import { Results } from "./components/ui/Results";
 import { Filters } from "./components/ui/Filters";
+import "./index.css";
 
 
 const App = () => {
     const query = useQuery();
     const [hitsPerPage, setHitsPerPage] = useState<number | undefined>(10);
+    const [filters, setFilters] = useState<any>();
 
     useEffect(() => {
         searchSettings.then((settings) => {
             setHitsPerPage(settings.hitsPerPage);
+            setFilters(settings.attributesForFaceting);
         });
     }, []);
     
@@ -34,15 +37,18 @@ const App = () => {
             initialUiState={{ [ALGOLIA_INDEX_NAME]: { query, page:1, } }}
             routing={searchRouting}
         >
-            <h1>Algolia</h1> 
             <Configure 
                 hitsPerPage={hitsPerPage}
                 filters={ALGOLIA_FILTER}
             />
-            <SearchBox/>
-            <Filters/>
-            <Results/>
-            <Pagination/>
+            <div className="layout">
+                <Filters filters={filters}/>
+                <div className="results-col">
+                    <SearchBox placeholder="Search..."/>
+                    <Results/>
+                    <Pagination/>
+                </div>
+            </div>
         </InstantSearch>
     );
 };

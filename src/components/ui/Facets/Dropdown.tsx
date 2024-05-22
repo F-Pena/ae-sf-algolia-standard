@@ -4,7 +4,7 @@ import { RefinementList } from 'react-instantsearch';
 interface DropdownProps {
     title:string,
     attribute:string,
-    isSearchable?:boolean
+    isSearchable?:boolean,
 }
 
 const Dropdown: React.FC<DropdownProps> = ({ title, attribute, isSearchable }) => {
@@ -21,7 +21,11 @@ const Dropdown: React.FC<DropdownProps> = ({ title, attribute, isSearchable }) =
             </button>
             {isOpen && (
                 <div>
-                    <RefinementList attribute={attribute} searchable={isSearchable} />
+                    <RefinementList 
+                        attribute={attribute} 
+                        searchablePlaceholder={`Search ${title}`} 
+                        searchable={isSearchable} 
+                    />
                 </div>
             )}
         </div>
