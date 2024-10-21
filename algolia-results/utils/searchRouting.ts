@@ -3,8 +3,7 @@ import { ALGOLIA_INDEX_NAME } from "./constants";
 
 const router = history({
     createURL({ qsModule, routeState, location }) {
-        const urlParts = location.href.match(/^(.*?)\/search/);
-        const baseUrl = `${urlParts ? urlParts[1] : ""}/`;
+        const baseUrl = window.location.href.split("?")[0];
         const queryParameters = {};
 
         if (routeState.query) {
@@ -21,7 +20,7 @@ const router = history({
             arrayFormat: "comma",
         });
         const queryPage = "search";
-        return `${baseUrl}${queryPage}${queryString}`;
+        return `${baseUrl}${queryString}`;
     },
 
     parseURL({ qsModule, location }: any) {
