@@ -3,28 +3,27 @@ import {
     Highlight
 } from "react-instantsearch"; 
 import type { Hit as AlgoliaHit } from 'instantsearch.js/es/types';
+import NoResultsBoundary from "./NoResultsBoundary";
 
 type HitProps = {
     hit: AlgoliaHit<{
         Title: string;
-        Summary: string;
-        Description: string;
-        ItemDefaultUrl: string;
+        Summary?: string;
+        Description?: string;
+        ItemDefaultUrl?: string;
+        ViewUrl?: string;
     }>;
 };
 
 const hitTemplate = ({ hit }: HitProps) => {
-    const hasLink = hit.ItemDefaultUrl && hit.ItemDefaultUrl !== "";
+    const url = hit.ItemDefaultUrl || hit.ViewUrl;
     const summary = hit.Summary || hit.Description;
     return (
         <div>
             <h2>
-                {hasLink ? 
-                    <a href={hit.ItemDefaultUrl}>
-                        <Highlight hit={hit} attribute="Title"/>
-                    </a> :
+                <a href={url}>
                     <Highlight hit={hit} attribute="Title"/>
-                }
+                </a>
             </h2>
             {summary && 
                 <p>{summary}</p>
@@ -36,6 +35,8 @@ const hitTemplate = ({ hit }: HitProps) => {
 export function Results () {
 
     return (
-        <Hits hitComponent={hitTemplate} />
+        <NoResultsBoundary>
+            <Hits hitComponent={hitTemplate} />
+        </NoResultsBoundary>
     )
 }

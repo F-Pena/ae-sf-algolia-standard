@@ -1,5 +1,5 @@
 import algoliasearch from "algoliasearch";
-import { autocomplete } from "@algolia/autocomplete-js";
+import { autocomplete, getAlgoliaResults } from "@algolia/autocomplete-js";
 import { createQuerySuggestionsPlugin } from "@algolia/autocomplete-plugin-query-suggestions";
 
 const searchbox = document.getElementById("algolia-searchbox");
@@ -22,7 +22,8 @@ const initialQuery = urlQuery ? urlQuery : "";
 
 const querySuggestionsPlugin = createQuerySuggestionsPlugin({
     searchClient,
-    indexName: suggestionsIndexName,
+    indexName: suggestionsIndexName, 
+    getSearchParams: () => ({ clickAnalytics: true }),
     transformSource({ source }) {
         return {
             ...source,
@@ -30,6 +31,9 @@ const querySuggestionsPlugin = createQuerySuggestionsPlugin({
                 return `${page}?query=${item.query}`;
             },
             templates: {
+                header({ html }) {
+                    return html`<div class="algolia-searchbox-suggestions__title">Search Suggestions</div>`;
+                },
                 item(params) {
                     const { item, html } = params;
                     
@@ -51,18 +55,57 @@ autocomplete({
         query: initialQuery
     },
     plugins: [querySuggestionsPlugin],
+    ...(indexName && {
+        getSources({ query }) {
+            return [
+                {
+                    sourceId: 'contentResults',
+                    getItems() {
+                        return getAlgoliaResults({
+                            searchClient,
+                            queries: [
+                                {
+                                    indexName,
+                                    params: {
+                                        query, 
+                                        clickAnalytics: true,
+                                        hitsPerPage: 5
+                                    }
+                                }
+                            ]
+                        });
+                    },
+                    templates: {
+                        header({ html }) {
+                            return html`<div class="algolia-searchbox-suggestions__title">Content Suggestions</div>`;
+                        },
+                        item({ item, html }) {
+                            const url = item.ViewUrl || item.ItemDefaultUrl;
+                            return html`
+                                <a href="${url}">
+                                    ${item.Title}
+                                </a>
+                            `;
+                        },
+                    },
+                },
+            ];
+        }
+    }),
     onSubmit: handleSubmit,
     render({ elements, render, html }, root) {
-        const { querySuggestionsPlugin } = elements;
+        const { querySuggestionsPlugin, contentResults } = elements;
 
         render(
-            html `
+            html`
                 <div class="algolia-searchbox-suggestions__panel">
-                    <div class="algolia-searchbox-suggestions__title">Suggestions</div>
                     ${querySuggestionsPlugin}
+                </div>
+                <div class="algolia-searchbox-suggestions__panel">
+                    ${contentResults}
                 </div>
             `,
             root
-        )
+        );
     }
 });

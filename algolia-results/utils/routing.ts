@@ -34,6 +34,7 @@ const router = history({
             page,
         };
     },
+    cleanUrlOnDispose: false
 });
 
 const stateMapping = {

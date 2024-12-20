@@ -1,4 +1,4 @@
-﻿const rootLevel = document.getElementById("root");
+﻿const rootLevel = document.getElementById("algolia-search-results-root");
 
 export const ALGOLIA_APP_ID: string = rootLevel?.getAttribute("data-app-id") || "";
 export const ALGOLIA_API_KEY: string = rootLevel?.getAttribute("data-api-key") || "";

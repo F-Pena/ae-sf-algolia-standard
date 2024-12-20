@@ -4,7 +4,9 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react({
+    jsxRuntime: 'automatic'
+  })],
   build: {
     modulePreload: {
       polyfill: false,
@@ -25,6 +27,7 @@ export default defineConfig({
     },
   },
   server: {
+    open: '/algolia-searchbox/index.html',
     hmr: true,
     watch: {
       usePolling: true,
