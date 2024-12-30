@@ -1,0 +1,91 @@
+.algolia-searchbox {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+
+    * {
+        box-sizing: border-box;
+    }
+
+
+    .aa-Form {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 0 10px;
+    
+        button {
+            border: 0;
+            margin: 0;
+            padding: 0;
+            background: none;
+            cursor: pointer;
+        }
+    }
+    
+    .aa-Input {
+        border: 0;
+        height: 40px;
+
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-decoration,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+          -webkit-appearance: none;
+          display: none;
+        }
+        
+        &::-ms-clear,
+        &::-ms-reveal {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+    }
+    
+    .aa-Label {
+        display: block;
+    }
+
+    .aa-Panel {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .aa-Source {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .algolia-searchbox-suggestions__title {
+        font-weight: bold;
+    }
+
+    .aa-List {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    &:has(.aa-Panel) {
+        .aa-Form {
+            border-radius: 5px 5px 0 0;
+            border-bottom-color: transparent;
+        }
+
+        #algolia-searchbox-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 0 0 5px 5px;
+            padding: 10px;
+        }
+    }
+}

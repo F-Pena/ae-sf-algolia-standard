@@ -5,16 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React + TS</title>
+    <link rel="stylesheet" href="./algolia-searchbox.scss">
   </head>
   <body>
-    <div id="algolia-searchbox" 
-      data-api-key="db735718a64189a3c371770a1ce757fb" 
-      data-app-id="GXEQ3BH4GF" 
-      data-index-name="sitefinitydemo" 
-      data-suggestions-index-name="sitefinitydemo_query_suggestions" 
-      data-page="/algolia-results/index.html">
+    <div class="algolia-searchbox">
+      <div id="algolia-searchbox" 
+        data-api-key="db735718a64189a3c371770a1ce757fb" 
+        data-app-id="GXEQ3BH4GF" 
+        data-index-name="sitefinitydemo" 
+        data-suggestions-index-name="sitefinitydemo_query_suggestions" 
+        data-page="/algolia-results/index.html">
+      </div>
+      <div id="algolia-searchbox-suggestions"></div>
     </div>
-    <div id="algolia-searchbox-suggestions"></div>
     <script type="module" src="./App.js"></script>
   </body>
 </html>

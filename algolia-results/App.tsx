@@ -16,7 +16,7 @@ import { Results } from "./components/ui/Results/ResultsList";
 import { Filters } from "./components/ui/Filters";
 import { AlgoliaStats } from "./components/ui/Stats";
 import aa from 'search-insights'; 
-import "./index.css";
+import "./algolia-results.scss";
 
 const App = () => {
     const query = useQuery();
@@ -49,8 +49,10 @@ const App = () => {
             <div className="layout">
                 <Filters filters={filters}/>
                 <div className="results-col">
-                    <SearchBox placeholder="Search..."/>
-                    <AlgoliaStats/>
+                    <div className="algolia-results__controls">
+                        <SearchBox placeholder="Search..."/>
+                        <AlgoliaStats/>
+                    </div>
                     <Results/>
                     <Pagination/>
                 </div>

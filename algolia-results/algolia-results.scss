@@ -1,4 +1,4 @@
-#root {
+#algolia-search-results-root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -7,6 +7,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 a {
@@ -75,27 +79,93 @@ blockquote {
   background-color: #f2f2f2;
 }
 
-code {
-  font-family: 'Courier New', monospace;
-  font-size: 1.4rem;
-  background-color: #f2f2f2;
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
+.ais-SearchBox {
+  display: inline-block;
+  
+  button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  .ais-SearchBox-form {
+    display: flex;
+    gap: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0 10px;
+  }
+
+  .ais-SearchBox-input {
+    height: 30px;
+    border: 0; 
+  }
 }
 
-pre {
-  font-family: 'Courier New', monospace;
-  font-size: 1.4rem;
-  line-height: 1.5;
-  background-color: #f2f2f2;
-  padding: 1rem;
-  border-radius: 4px;
-  overflow-x: auto;
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+.filter__toggle {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  margin: 0 0 10px;
+  padding: 0 0 10px;
+  background: transparent;
+  text-align: left;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:after {
+    content: "+";
+    display: inline-block;
+    margin-left: auto;
+  }
+
+  &.filter__toggle--open {
+    &:after {
+      content: "-";
+    }
+  }
+}
+
+.ais-RefinementList-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.ais-Pagination-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.agolia-results__controls {
+  
+}
+
+.layout {
+  display:grid;
+  gap: 20px;
 }
 
 @media(min-width:768px) {
   .layout {
-    display:grid;
     grid-template-columns:25% 1fr;
   }
 }

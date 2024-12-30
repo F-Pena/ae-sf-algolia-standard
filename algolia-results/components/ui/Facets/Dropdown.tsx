@@ -15,8 +15,12 @@ const Dropdown: React.FC<DropdownProps> = ({ title, attribute, isSearchable }) =
     };
 
     return (
-        <div>
-            <button onClick={toggleDropdown} aria-expanded={isOpen}>
+        <div className="filter filter--dropdown">
+            <button 
+                className={`filter__toggle ${isOpen ? "filter__toggle--open" : ""}`} 
+                onClick={toggleDropdown} 
+                aria-expanded={isOpen}
+            >
                 {title}
             </button>
             {isOpen && (
