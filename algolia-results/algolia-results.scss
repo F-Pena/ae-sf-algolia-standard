@@ -80,8 +80,8 @@ blockquote {
 }
 
 .ais-SearchBox {
-  display: inline-block;
-  
+  margin-bottom: 10px;
+
   button {
     border: 0;
     margin: 0;
@@ -100,6 +100,7 @@ blockquote {
   .ais-SearchBox-input {
     height: 30px;
     border: 0; 
+    flex-grow: 1;
   }
 }
 
@@ -143,6 +144,19 @@ blockquote {
   margin: 0;
   padding: 0;
   list-style-type: none;
+}
+
+.ais-RefinementList-count {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  padding: 3px;
+  border-radius: 50%;
+  font-size: 10px;
+  background: #535bf2;
+  text-align: center;
+  color: #fff;
 }
 
 .ais-Pagination-list {

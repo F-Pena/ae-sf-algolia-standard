@@ -5,9 +5,12 @@ interface DropdownProps {
     title:string,
     attribute:string,
     isSearchable?:boolean,
+    limit?:number,
+    showMore?:boolean,
+    rootClassName?:string,
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ title, attribute, isSearchable }) => {
+const Dropdown: React.FC<DropdownProps> = ({ title, attribute, isSearchable, limit, showMore, rootClassName }) => {
     const [isOpen, setIsOpen] = useState(true);
 
     const toggleDropdown = () => {
@@ -15,7 +18,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, attribute, isSearchable }) =
     };
 
     return (
-        <div className="filter filter--dropdown">
+        <div className={`filter filter--dropdown ${rootClassName}`}>
             <button 
                 className={`filter__toggle ${isOpen ? "filter__toggle--open" : ""}`} 
                 onClick={toggleDropdown} 
@@ -29,6 +32,8 @@ const Dropdown: React.FC<DropdownProps> = ({ title, attribute, isSearchable }) =
                         attribute={attribute} 
                         searchablePlaceholder={`Search ${title}`} 
                         searchable={isSearchable} 
+                        limit={limit}
+                        showMore={showMore} 
                     />
                 </div>
             )}

@@ -21,21 +21,18 @@ import "./algolia-results.scss";
 const App = () => {
     const query = useQuery();
     const [hitsPerPage, setHitsPerPage] = useState<number | undefined>(10);
-    const [filters, setFilters] = useState<any>();
 
     useEffect(() => {
         searchSettings.then((settings) => {
             setHitsPerPage(settings.hitsPerPage);
-            setFilters(settings.attributesForFaceting);
         });
     }, []);
     
     return (
         <InstantSearch
+            searchClient={searchClient} 
             indexName={ALGOLIA_INDEX_NAME} 
-            searchClient={searchClient}
             insights={true} 
-            initialUiState={{ [ALGOLIA_INDEX_NAME]: { query, page:1, } }}
             routing={searchRouting} 
             future={{
                 preserveSharedStateOnUnmount: true
@@ -47,7 +44,7 @@ const App = () => {
                 clickAnalytics={true}
             />
             <div className="layout">
-                <Filters filters={filters}/>
+                <Filters />
                 <div className="results-col">
                     <div className="algolia-results__controls">
                         <SearchBox placeholder="Search..."/>

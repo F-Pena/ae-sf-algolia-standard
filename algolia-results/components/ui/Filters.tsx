@@ -1,16 +1,55 @@
 import Dropdown from "./Facets/Dropdown";
+import { SortBy } from "instantsearch.js";
+import type { SearchResults } from 'algoliasearch-helper';
+export interface CustomFacet {
+    title: string;
+    attributeName: string;
+    operator?: "and" | "or";
+    searchable: boolean;
+    searchablePlaceholder?: string;
+    limit: number;
+    showMore: boolean;
+    showMoreLimit?: number;
+    sortBy?: SortBy<SearchResults.FacetValue>;
+    rootClassName?: string;
+    classNames?: object;
+}
 
-export const Filters = ({ filters }:any) => {
+const facets: CustomFacet[] = [
+    {
+      title: "Content Type",
+      attributeName: "ContentType",
+      operator: "or",
+      searchable: true,
+      limit: 20,
+      showMore: false,
+      rootClassName: "algolia-facet__desktop-no-toggle",
+    },
+    {
+        title: "Date Created",
+        attributeName: "DateCreated",
+        operator: "or",
+        searchable: false,
+        limit: 20,
+        showMore: false,
+        rootClassName: "algolia-facet__desktop-no-toggle",
+    },
+];
 
+export const Filters = () => {
     return (
         <div className="filters">
-            {filters.map((filter: any) => {
-                const isSearchable = filter.startsWith("searchable(") && filter.endsWith(")");
-                const attribute = isSearchable ? filter.match(/\(([^)]+)\)/)[1] : filter;
-                const title = `${attribute.replace(/([A-Z])/g, ' $1').trim()}`;
+            {facets.map((facet: any) => {
                 return (
-                    <div key={attribute}>
-                        <Dropdown title={title} attribute={attribute} isSearchable={isSearchable}/>
+                    <div key={facet.attributeName}>
+                        <Dropdown 
+                            title={facet.title} 
+                            attribute={facet.attributeName} 
+                            isSearchable={facet.searchable} 
+                            limit={facet.limit}
+                            showMore={facet.showMore}
+                            rootClassName={facet.rootClassName}
+                        />
                     </div>
                 );
             })}
